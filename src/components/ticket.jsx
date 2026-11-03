@@ -1,4 +1,3 @@
-
 export default function Ticket({ evento }) {
   const fecha = new Date(evento.fecha).toLocaleDateString("es-CO", {
     timeZone: "America/Bogota",
@@ -10,9 +9,11 @@ export default function Ticket({ evento }) {
   const precio = evento.precioDesde.toLocaleString("es-CO");
 
   return (
-    <div className="relative flex w-full max-w-[1000px] min-h-[290px] items-end overflow-hidden rounded-xl bg-linear-to-br from-[#a99dbd] via-[#a98c99] to-[#ad8179] p-4">
+    <div className="relative flex min-h-[270px] h-110 w-full items-end overflow-hidden rounded-xl bg-linear-to-br from-[#a99dbd] via-[#a98c99] to-[#ad8179] p-4">
       {/* Círculo decorativo */}
-      <div className="absolute -top-16 -right-14 h-64 w-64 rounded-full bg-white/10" />
+      {
+        <div className="absolute -top-16 -right-14 h-48 w-48 rounded-full bg-white/10" />
+      }
 
       {/* Tarjeta blanca */}
       <div className="relative z-10 w-full rounded-xl bg-white p-5 text-black shadow-lg">
@@ -20,18 +21,14 @@ export default function Ticket({ evento }) {
           Destacado
         </span>
 
-        <h2 className="mt-3 text-xl font-bold">
-          {evento.titulo}
-        </h2>
+        <h2 className="mt-3 text-xl font-bold">{evento.titulo}</h2>
 
         <p className="mt-2 text-sm text-neutral-500">
           {fecha} · {evento.recinto.nombre}
         </p>
 
         <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
-          <p className="font-semibold">
-            Desde ${precio}
-          </p>
+          <p className="font-semibold">Desde ${precio}</p>
 
           <a
             href={`#evento/${evento.slug}`}

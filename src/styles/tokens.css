@@ -1,4 +1,4 @@
-:root{
+:root {
 
     /* Color fondo */
     --color-pagina: #f7f7f7;
@@ -32,17 +32,17 @@
     --color-alerta-suave: #FFF4d6;
     --color-error: #C5221f;
     --color-error-suave: #FCE8E6;
-    
 
-    
+
+
     --funte-texto: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --funte-titulos: Georgia, "Times New Roman", serif; 
+    --funte-titulos: Georgia, "Times New Roman", serif;
     --texto-pequeno: 0.875rem;
     --texto-subtitulo: 1.5rem;
     --texto-titulo: clamp(2rem, 1.5rem + 2vw, 3rem);
-    --interlineado : 1.6;
+    --interlineado: 1.6;
 
-    
+
     --espacio-1: 0.5rem;
     --espacio-2: 1rem;
     --espacio-3: 1.5rem;
@@ -51,4 +51,8 @@
     --radio: 0.5rem;
     --ancho-contenido: 72rem;
 
+}
+
+.bg-main {
+    background: var(--color-primario-marca);
 }
