@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import Icono from "./Icono.jsx";
-import "./Navbar.css";
+import "../styles/Navbar.css";
 
 const DESTINOS = {
+  inicio: "#incio",
   explorar: "#explorar",
-  conciertos: "#conciertos",
-  teatro: "#teatro",
-  deportes: "#deportes",
-  festivales: "#festivales",
 };
 
 export default function Navbar({
@@ -24,15 +21,16 @@ export default function Navbar({
 }) {
   const [abierto, setAbierto] = useState(false);
   const [busqueda, setBusqueda] = useState("");
-  
+
   const botonMenu = useRef(null);
   const campoBusqueda = useRef(null);
   const nav = textos?.navbar;
   const ingles = idioma === "en";
   const abrir =
-    textos?.menuMovil.abrir ?? (ingles ? "Open menu" : "Abrir menú");
+    textos?.menuMovil?.abrir ?? (ingles ? "Open menu" : "Abrir menú");
+
   const cerrar =
-    textos?.menuMovil.cerrar ?? (ingles ? "Close menu" : "Cerrar menú");
+    textos?.menuMovil?.cerrar ?? (ingles ? "Close menu" : "Cerrar menú");
   const enlaces = Object.entries(nav?.enlaces ?? {}).filter(
     ([clave]) => DESTINOS[clave],
   );
@@ -76,7 +74,7 @@ export default function Navbar({
           <span className="navbar-simbolo" aria-hidden="true">
             <Icono nombre="ticket" />
           </span>
-          <span>{nav?.logo.texto ?? "Héroes"}</span>
+          <span>{nav?.logo.texto ?? "Taquilla"}</span>
         </a>
 
         <div className="navbar-movil-acciones">
@@ -179,6 +177,15 @@ export default function Navbar({
               )}
             </>
           )}
+          <button
+              className="navbar-icono navbar-accesibilidad"
+              type="button"
+              aria-label={ingles ? "Enlarge text" : "Aumentar texto"}
+              aria-pressed={textoGrande}
+              onClick={alternarTexto}
+            >
+              <Icono nombre="accesibilidad" />
+            </button>
           <div className="navbar-utilidades">
             <label className="navbar-idioma">
               <Icono nombre="idioma" />
@@ -191,15 +198,7 @@ export default function Navbar({
                 <option value="en">EN</option>
               </select>
             </label>
-            <button
-              className="navbar-icono navbar-accesibilidad"
-              type="button"
-              aria-label={ingles ? "Enlarge text" : "Aumentar texto"}
-              aria-pressed={textoGrande}
-              onClick={alternarTexto}
-            >
-              <Icono nombre="accesibilidad" />
-            </button>
+            
             {nav && (
               <a
                 className="navbar-accion"
@@ -210,6 +209,13 @@ export default function Navbar({
               </a>
             )}
           </div>
+          <button
+            type="button"
+            className="Navbar-Crear-Cuenta"
+            onClick={() => setAbierto(false)}
+          >
+            {nav?.botones?.crearCuenta ?? (ingles ? "Sign up" : "Crear cuenta")}
+          </button>
         </div>
       </nav>
     </header>

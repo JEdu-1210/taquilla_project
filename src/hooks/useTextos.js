@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 const API = "https://yanethm-taquilla-api.fly.dev/api/v1/textos";
-const CLAVES_MENU = ["explorar", "conciertos", "teatro", "deportes", "festivales"];
-
+const CLAVES_MENU = ["inicio", "explorar",];
 function validarTextos(datos) {
     const textos = datos?.textos;
     const nav = textos?.navbar;

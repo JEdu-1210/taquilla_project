@@ -1,28 +1,30 @@
-*{
-    box-sizing: border-box;
-}
-body{
-    margin: 0;
-    font-family: var(--funte-texto);
-    font-size: var(--texto-base);
-    line-height: var(--interlineado);
-    color: var(--color-texto);
-    background: var(--color-fondo);
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&display=swap");
+
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
 }
 
-h1, h2, h3 {
-    font-family: var(--funte-titulos);
-    line-height: 1.2;
-    overflow-wrap: anywhere;
+body {
+  margin: 0;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-texto, #141414);
+  background-color: var(--color-fondo, #ffffff);
 }
 
-h1 {font-size: var(--texto-titulo);}
-h2 {font-size: var(--texto-subtitulo);}
-a {color: var(--color-primario);}
-a:hover {color: var(--color-primario-hover);}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
 
-.contenedor{
-    max-width: var(--ancho-contenido);
-    margin-inline: auto;
-    width: calc(100% -2rem);
+.contenedor {
+  max-width: var(--ancho-contenido, 72rem);
+  margin-inline: auto;
+  width: calc(100% - 2rem);
 }
