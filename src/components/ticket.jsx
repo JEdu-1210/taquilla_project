@@ -1,5 +1,5 @@
-export default function Ticket({ evento }) {
-  const fecha = new Date(evento.fecha).toLocaleDateString("es-CO", {
+export default function Ticket({ evento,textos,idioma }) {
+  const fecha = new Date(evento.fecha).toLocaleDateString(idioma === "en" ? "en-US":"es-CO", {
     timeZone: "America/Bogota",
     weekday: "short",
     day: "numeric",
@@ -18,7 +18,7 @@ export default function Ticket({ evento }) {
       {/* Tarjeta blanca */}
       <div className="relative z-10 w-full rounded-xl bg-white p-5 text-black shadow-lg">
         <span className="rounded-md bg-neutral-100 px-3 py-1 text-xs">
-          Destacado
+          {textos?.etiqueta ?? "Destacado"}
         </span>
 
         <h2 className="mt-3 text-xl font-bold">{evento.titulo}</h2>
@@ -28,13 +28,15 @@ export default function Ticket({ evento }) {
         </p>
 
         <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
-          <p className="font-semibold">Desde ${precio}</p>
+          <p className="font-semibold">
+            {(textos?.desde ?? "Desde {precio}").replace("{precio}", `$${precio}`)}
+            </p>
 
           <a
             href={`#evento/${evento.slug}`}
             className="rounded-lg bg-[#141414] px-5 py-3 text-sm !text-white transition hover:bg-neutral-700"
           >
-            Ver evento
+            {textos?.botones?.verEvento??"Ver evento"} 
           </a>
         </div>
       </div>

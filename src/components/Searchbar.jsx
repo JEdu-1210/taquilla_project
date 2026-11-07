@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Searchbar({ onBuscar }) {
+export default function Searchbar({ onBuscar, textos }) {
   const [evento, setEvento] = useState("");
   const [ciudad, setCiudad] = useState("Manizales");
   const [fecha, setFecha] = useState("");
@@ -36,14 +36,14 @@ export default function Searchbar({ onBuscar }) {
 
         <div className="min-w-0 flex-1">
           <label htmlFor="evento" className="block text-xs text-neutral-500">
-            Qué
+            {textos?.etiquetas?.que ?? "Qué"}
           </label>
           <input
             id="evento"
             type="search"
             value={evento}
             onChange={(e) => setEvento(e.target.value)}
-            placeholder="Evento o artista"
+            placeholder={textos?.placeholders?.que ?? "Evento o artista"}
             className="w-full min-w-0 bg-transparent text-sm outline-none"
           />
         </div>
@@ -64,7 +64,8 @@ export default function Searchbar({ onBuscar }) {
 
         <div className="min-w-0 flex-1">
           <label htmlFor="ciudad" className="block text-xs text-neutral-500">
-            Dónde
+            {textos?.etiquetas?.donde ??
+              "Dónde"}
           </label>
           <input
             id="ciudad"
@@ -91,7 +92,7 @@ export default function Searchbar({ onBuscar }) {
 
         <div className="min-w-0 flex-1">
           <label htmlFor="fecha" className="block text-xs text-neutral-500">
-            Cuándo
+            {textos?.etiquetas?.cuando ??"Cuándo"}
           </label>
 
           <input
@@ -109,7 +110,7 @@ export default function Searchbar({ onBuscar }) {
         type="submit"
         className="shrink-0 rounded-lg bg-[#141414] px-6 py-4 text-sm font-semibold text-white transition hover:bg-neutral-700"
       >
-        Buscar
+        {textos?.botones?.buscar ?? "Buscar"}
       </button>
     </form>
   );

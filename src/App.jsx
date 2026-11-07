@@ -4,6 +4,7 @@ import "./styles/App.css";
 import Navbar from "./components/Navbar.jsx";
 import { useEffect, useState } from "react";
 import HomePage from "./pages/home.page.jsx";
+import Cookies from "./components/Cookies.jsx";
 
 function leerSeleccion() {
   return window.location.hash.slice(1) || "inicio";
@@ -16,7 +17,7 @@ function App() {
   const [consulta, setConsulta] = useState("");
   const [textoGrande, setTextoGrande] = useState(false);
 
-  const datos = useTextos(idioma);
+const datos = useTextos(idioma);
 
   // Detectar cambios en la navegación
   useEffect(() => {
@@ -64,8 +65,13 @@ function App() {
         textoGrande={textoGrande}
         alternarTexto={() => setTextoGrande(valor => !valor)}
       />
+  
+      {activo === "inicio" && <HomePage 
+      idioma = {idioma}
+      textos= {datos.textos} 
+      />}
 
-      {activo === "inicio" && <HomePage />}
+      
     </>
   );
 }

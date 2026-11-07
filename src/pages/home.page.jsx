@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Searchbar from "../components/Searchbar.jsx";
 import Ticket from "../components/ticket.jsx";
 import SeccionEventos from "../components/SeccionEventos.jsx";
+import Cookies from "../components/Cookies";
 
 import {
   obtenerEventosDestacados,
@@ -9,7 +10,8 @@ import {
 } from "../services/eventosService.js";
 import Categorias from "../components/Categorias.jsx";
 import Footer from "../components/Footer.jsx";
-export default function HomePage() {
+
+export default function HomePage({ idioma, textos }) {
   const [resultados, setResultados] = useState([]);
   const [buscando, setBuscando] = useState(false);
   const [busquedaRealizada, setBusquedaRealizada] = useState(false);
@@ -84,25 +86,37 @@ export default function HomePage() {
             {/* Columna izquierda */}
             <div>
               <span className="inline-block rounded-md bg-white px-3 py-1 text-xs font-medium text-black">
-                Temporada nov – dic 2026
+                {textos?.paginas?.inicio?.hero?.etiquetas?.temporada ??
+                  "Season Nov - Dec  2026"}
               </span>
 
               <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight lg:text-[42px]">
-                Tu próxima noche empieza aquí
+                {textos?.paginas?.inicio?.hero?.titulo ??
+                  "Tu próxima noche empieza aquí"}
               </h1>
 
               <p className="mt-5 max-w-xl text-base leading-relaxed text-neutral-400">
-                Conciertos, teatro, deportes y festivales. Busca por categoría,
-                fecha o ciudad y consulta todos los detalles de cada evento.
+                {textos?.paginas?.inicio?.hero?.subtitulo ??
+                  "Conciertos, teatro, deportes y festivales. Busca por categoría,fecha o ciudad y consulta todos los detalles de cada evento."}
               </p>
 
-              <Searchbar onBuscar={realizarBusqueda} />
+              <Searchbar
+                onBuscar={realizarBusqueda}
+                textos={textos?.paginas?.inicio?.hero?.buscador}
+              />
               <div className="mt-5 flex flex-wrap items-center gap-3 text-xs">
-                <span className="text-neutral-500">Populares:</span>
+                <span className="text-neutral-500">
+                  {textos?.paginas?.inicio?.hero?.buscador?.populares ??
+                    "Populares:"}
+                </span>
                 <span>Salsa</span>
                 <span>Stand-up</span>
-                <span>Fútbol</span>
-                <span>Festivales de fin de año</span>
+                <span>{idioma === "en" ? "Football" : "Fútbol"}</span>
+                <span>
+                  {idioma === "en"
+                    ? "End-of-year festivals"
+                    : "Festivales de fin de año"}
+                </span>
               </div>
             </div>
 
@@ -115,7 +129,11 @@ export default function HomePage() {
               {error && <p className="text-red-400">{error}</p>}
 
               {!cargando && !error && eventoDestacado && (
-                <Ticket evento={eventoDestacado} />
+                <Ticket
+                  evento={eventoDestacado}
+                  textos={textos?.paginas?.inicio?.hero?.destacado}
+                  idioma={idioma}
+                />
               )}
 
               {!cargando && !error && !eventoDestacado && (
@@ -153,6 +171,7 @@ export default function HomePage() {
           </section>
         )}
         <Categorias />
+        <Cookies textos={textos?.cookies?.banner} />
         <SeccionEventos
           titulo="Destacados de la semana"
           descripcion="Los eventos con más entradas vendidas"

@@ -28,15 +28,15 @@ export default function EventoCard({ evento }) {
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white text-[#141414]">
       {/* Afiche decorativo */}
-      <div
+     { <div
         className="relative h-40 overflow-hidden"
         style={{
-          background: `linear-gradient(135deg, ${evento.afiche?.color1 || "#777"}, ${evento.afiche?.color2 || "#aaa"})`,
+          background: `linear-gradient( 135deg, ${evento.afiche?.color1 || "#777"}, ${evento.afiche?.color2 || "#aaa" })`
         }}
       >
         <div className="absolute -right-10 -top-12 h-36 w-36 rounded-full bg-white/15" />
         <div className="absolute -bottom-14 -left-8 h-28 w-28 rounded-full bg-black/15" />
-      </div>
+      </div>}
 
       {/* Información */}
       <div className="flex flex-1 flex-col p-4">
