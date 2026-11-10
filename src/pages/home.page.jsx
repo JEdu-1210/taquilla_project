@@ -3,11 +3,8 @@ import Searchbar from "../components/Searchbar.jsx";
 import Ticket from "../components/ticket.jsx";
 import SeccionEventos from "../components/SeccionEventos.jsx";
 import Cookies from "../components/Cookies";
-
-import {
-  obtenerEventosDestacados,
-  buscarEventos,
-} from "../services/eventosService.js";
+import { useEventosDestacados } from "../hooks/useEventosDestacados.js";
+import { buscarEventos } from "../services/eventosService.js";
 import Categorias from "../components/Categorias.jsx";
 import Footer from "../components/Footer.jsx";
 
@@ -16,60 +13,59 @@ export default function HomePage({ idioma, textos }) {
   const [buscando, setBuscando] = useState(false);
   const [busquedaRealizada, setBusquedaRealizada] = useState(false);
   const [errorBusqueda, setErrorBusqueda] = useState("");
-  const [eventoDestacado, setEventoDestacado] = useState(null);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState("");
-  const [eventosPopulares, setEventosPopulares] = useState([]);
   const [eventosProximos, setEventosProximos] = useState([]);
+  const [ciudadActual, setCiudadActual] = useState("Manizales");
+  const { eventos, cargando, error } = useEventosDestacados();
 
-  useEffect(() => {
-    async function cargarEventos() {
-      try {
-        const eventos = await obtenerEventosDestacados();
+  const eventoDestacado =
+    eventos.find((evento) => evento.slug === "festival-niebla-2026") ||
+    eventos[0] ||
+    null;
 
-        console.log("Eventos destacados:", eventos);
+  const eventosPopulares = eventos.slice(0, 4);
 
-        // Evento principal del Figma
-        const festival = eventos.find(
-          (evento) => evento.slug === "festival-niebla-2026",
-        );
+  
+useEffect(() => {
+  let activo = true;
 
-        setEventoDestacado(festival || eventos[0] || null);
+  async function cargarEventosProximos() {
+    try {
+      const proximos = await buscarEventos({
+        ciudad: "Manizales",
+      });
 
-        // Tarjetas de destacados
-        setEventosPopulares(eventos.slice(0, 4));
-      } catch (err) {
-        console.error("Error cargando destacados:", err);
-        setError(err.message);
-      } finally {
-        setCargando(false);
-      }
-
-      // Cargar eventos de Manizales por separado
-      try {
-        const proximos = await buscarEventos({
-          ciudad: "Manizales",
-        });
-
-        console.log("Eventos de Manizales:", proximos);
-
+      if (activo) {
         setEventosProximos(proximos.slice(0, 4));
-      } catch (err) {
-        console.error("Error cargando eventos de Manizales:", err);
       }
+    } catch (err) {
+      console.error("Error cargando eventos de Manizales:", err);
     }
+  }
 
-    cargarEventos();
-  }, []);
+  cargarEventosProximos();
+
+  return () => {
+    activo = false;
+  };
+}, []);
 
   async function realizarBusqueda(filtros) {
     setBuscando(true);
     setBusquedaRealizada(true);
     setErrorBusqueda("");
+    if (filtros.ciudad?.trim()) {
+      setCiudadActual(filtros.ciudad.trim());
+    }
 
     try {
       const eventos = await buscarEventos(filtros);
+
       setResultados(eventos);
+
+      if (filtros.ciudad?.trim()) {
+        setEventosProximos(eventos.slice(0, 4));
+        setCiudadActual(filtros.ciudad.trim());
+      }
     } catch (err) {
       setErrorBusqueda(err.message);
       setResultados([]);
@@ -170,20 +166,27 @@ export default function HomePage({ idioma, textos }) {
             </div>
           </section>
         )}
-        <Categorias />
+        <Categorias textos={textos?.general?.categorias} />
         <Cookies textos={textos?.cookies?.banner} />
         <SeccionEventos
-          titulo="Destacados de la semana"
-          descripcion="Los eventos con más entradas vendidas"
+          titulo={textos?.paginas?.inicio?.destacados?.titulo}
+          descripcion={textos?.paginas?.inicio?.destacados?.subtitulo}
           eventos={eventosPopulares}
+          textos={textos?.paginas?.inicio?.destacados}
+          verTodos={textos?.paginas?.inicio?.destacados?.enlaces?.verTodos}
         />
         <SeccionEventos
-          titulo="Próximamente en Manizales"
-          descripcion="Cambia la ciudad desde el buscador"
+          titulo={textos?.paginas?.inicio?.proximos?.titulo?.replace(
+            "{ciudad}",
+            ciudadActual,
+          )}
+          descripcion={textos?.paginas?.inicio?.proximos?.subtitulo}
+          textos={textos?.paginas?.inicio?.proximos}
           eventos={eventosProximos}
+          verTodos={textos?.paginas?.inicio?.destacados?.enlaces?.verTodos}
         />
       </main>
-      <Footer />
+      <Footer textos={textos?.footer} />
     </>
   );
 }

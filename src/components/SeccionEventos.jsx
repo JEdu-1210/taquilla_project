@@ -4,6 +4,8 @@ import EventoCard from "./EventoCard.jsx";
 export default function SeccionEventos({
   titulo,
   descripcion,
+  verTodos,
+  textos,
   eventos = [],
   cargando = false,
   error = "",
@@ -16,7 +18,7 @@ export default function SeccionEventos({
         <div className="mb-5 flex items-center justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-[#141414]">
-              {titulo}
+              {textos?.titulo ?? "Destacados de la semana"}
             </h2>
 
             <p className="mt-1 text-sm text-neutral-500">
@@ -28,7 +30,7 @@ export default function SeccionEventos({
             href="#explorar"
             className="shrink-0 text-sm font-medium text-[#141414] hover:underline"
           >
-            Ver todos →
+            {verTodos ?? "Ver todos"}
           </a>
         </div>
 
