@@ -18,7 +18,7 @@ export default function SeccionEventos({
         <div className="mb-5 flex items-center justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-[#141414]">
-              {textos?.titulo ?? "Destacados de la semana"}
+              {titulo ?? "Destacados de la semana"}
             </h2>
 
             <p className="mt-1 text-sm text-neutral-500">

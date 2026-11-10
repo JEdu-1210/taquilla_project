@@ -17,37 +17,47 @@ export default function HomePage({ idioma, textos }) {
   const [ciudadActual, setCiudadActual] = useState("Manizales");
   const { eventos, cargando, error } = useEventosDestacados();
 
+  const ciudadReemplazada = textos?.paginas?.inicio?.proximos?.titulo?.replace(
+    "{ciudad}",
+    ciudadActual,
+  );
+
   const eventoDestacado =
     eventos.find((evento) => evento.slug === "festival-niebla-2026") ||
     eventos[0] ||
     null;
 
   const eventosPopulares = eventos.slice(0, 4);
+  console.log(
+    textos?.paginas?.inicio?.proximos?.titulo?.replace(
+      "{ciudad}",
+      ciudadActual,
+    ),
+  );
 
-  
-useEffect(() => {
-  let activo = true;
+  useEffect(() => {
+    let activo = true;
 
-  async function cargarEventosProximos() {
-    try {
-      const proximos = await buscarEventos({
-        ciudad: "Manizales",
-      });
+    async function cargarEventosProximos() {
+      try {
+        const proximos = await buscarEventos({
+          ciudad: "Manizales",
+        });
 
-      if (activo) {
-        setEventosProximos(proximos.slice(0, 4));
+        if (activo) {
+          setEventosProximos(proximos.slice(0, 4));
+        }
+      } catch (err) {
+        console.error("Error cargando eventos de Manizales:", err);
       }
-    } catch (err) {
-      console.error("Error cargando eventos de Manizales:", err);
     }
-  }
 
-  cargarEventosProximos();
+    cargarEventosProximos();
 
-  return () => {
-    activo = false;
-  };
-}, []);
+    return () => {
+      activo = false;
+    };
+  }, []);
 
   async function realizarBusqueda(filtros) {
     setBuscando(true);
@@ -176,10 +186,7 @@ useEffect(() => {
           verTodos={textos?.paginas?.inicio?.destacados?.enlaces?.verTodos}
         />
         <SeccionEventos
-          titulo={textos?.paginas?.inicio?.proximos?.titulo?.replace(
-            "{ciudad}",
-            ciudadActual,
-          )}
+          titulo={ciudadReemplazada}
           descripcion={textos?.paginas?.inicio?.proximos?.subtitulo}
           textos={textos?.paginas?.inicio?.proximos}
           eventos={eventosProximos}

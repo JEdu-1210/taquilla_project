@@ -1,4 +1,3 @@
-
 import { useTextos } from "./hooks/useTextos.js";
 import "./styles/App.css";
 import Navbar from "./components/Navbar.jsx";
@@ -12,12 +11,15 @@ function leerSeleccion() {
 
 function App() {
   // Idioma por defecto: español
-  const [idioma, setIdioma] = useState("es");
+  //const [idioma, setIdioma] = useState("es");
+  const [idioma, setIdioma] = useState(() => {
+    return localStorage.getItem("lang") ?? "es";
+  });
   const [activo, setActivo] = useState(leerSeleccion);
   const [consulta, setConsulta] = useState("");
   const [textoGrande, setTextoGrande] = useState(false);
 
-const datos = useTextos(idioma);
+  const datos = useTextos(idioma);
 
   // Detectar cambios en la navegación
   useEffect(() => {
@@ -36,6 +38,7 @@ const datos = useTextos(idioma);
   // Actualizar idioma del documento
   useEffect(() => {
     document.documentElement.lang = idioma;
+    localStorage.setItem("lang", idioma);
   }, [idioma]);
 
   // Ajustar tamaño del texto
@@ -63,15 +66,12 @@ const datos = useTextos(idioma);
         activo={activo}
         onBuscar={buscar}
         textoGrande={textoGrande}
-        alternarTexto={() => setTextoGrande(valor => !valor)}
+        alternarTexto={() => setTextoGrande((valor) => !valor)}
       />
-  
-      {activo === "inicio" && <HomePage 
-      idioma = {idioma}
-      textos= {datos.textos} 
-      />}
 
-      
+      {activo === "inicio" && (
+        <HomePage idioma={idioma} textos={datos.textos} />
+      )}
     </>
   );
 }
