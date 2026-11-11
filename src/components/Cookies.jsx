@@ -26,7 +26,7 @@ export default function Cookies({textos}) {
       </p>
       <div className="mt-4 flex justify-end gap-3 ">
         <button
-          className="px-5 py-2 text-[var(--color-principal-texto)] rounded-lg border border-neutral-300 "
+          className="px-5 py-2 text-(--color-principal-texto) rounded-lg border border-neutral-300 "
           onClick={rechazarCookies}
         >
           {textos?.botones?.rechazar ?? "Rechazar"}

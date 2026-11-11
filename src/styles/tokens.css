@@ -41,6 +41,8 @@
     --texto-subtitulo: 1.5rem;
     --texto-titulo: clamp(2rem, 1.5rem + 2vw, 3rem);
     --interlineado: 1.6;
+    /* 16px: tamano del texto para todos los elementos (dentro de :root) */
+    --texto-normal: 1rem;
 
 
     --espacio-1: 0.5rem;

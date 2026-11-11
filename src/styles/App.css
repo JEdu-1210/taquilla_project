@@ -1,11 +1,15 @@
-.sitio{
-    min-height:     100vh;
+:root {
+    font-size: var(--texto-normal);
+}
+
+.sitio {
+    min-height: 100vh;
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
 }
 
-.contenido{
+.contenido {
     flex: 1;
     display: grid;
 }

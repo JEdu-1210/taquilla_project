@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Icono from "./Icono.jsx";
 import "../styles/Navbar.css";
+import Accesibilidad from "./Accesibilidad.jsx";
 
 const DESTINOS = {
   inicio: "#incio",
@@ -177,7 +178,7 @@ export default function Navbar({
               )}
             </>
           )}
-          <button
+          {/* <button
               className="navbar-icono navbar-accesibilidad"
               type="button"
               aria-label={ingles ? "Enlarge text" : "Aumentar texto"}
@@ -185,7 +186,9 @@ export default function Navbar({
               onClick={alternarTexto}
             >
               <Icono nombre="accesibilidad" />
-            </button>
+            </button> */}
+            <Accesibilidad
+              icono={<Icono nombre="accesibilidad" />}/>
           <div className="navbar-utilidades">
             <label className="navbar-idioma">
               <Icono nombre="idioma" />
