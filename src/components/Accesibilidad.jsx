@@ -81,7 +81,8 @@ export default function Accesibilidad({ icono, textos }) {
     setEspaciadoLectura(false)
     setIsHighContrast(false)
     setReduccionVelocidad(false)
-    setIsLinkUnderline(false)  
+    setIsLinkUnderline(false)
+    
   
   };
   useEffect(() => {
