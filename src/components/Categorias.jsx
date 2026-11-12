@@ -45,14 +45,14 @@ export default function Categorias({ textos, textosCarga, textosEventos }) {
                   {textos?.[categoria.id] ?? categoria.nombre}
                 </h3>
 
-                <p className="text-sm text-neutral-500">
+                
                   <p className="text-sm text-neutral-500">
                     {(categoria.eventos === 1
                       ? textosEventos?.uno
                       : textosEventos?.otro
                     )?.replace("{cantidad}", categoria.eventos)}
                   </p>
-                </p>
+                
               </a>
             );
           })}

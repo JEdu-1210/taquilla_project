@@ -11,8 +11,10 @@ export default function SeccionEventos({
   error = "",
   textoEventoCardPrecio,
   verEventosBotones,
-  textosCategoria,
-  idioma
+  textosCategorias,
+  idioma,
+  textosCarga,
+  textosSinEventos
 }) {
   return (
     <section className="bg-[#f7f7f7] py-8">
@@ -41,7 +43,7 @@ export default function SeccionEventos({
         {/* Estado de carga */}
         {cargando && (
           <p className="text-neutral-500">
-            Cargando eventos...
+            {textosCarga?.indicador}
           </p>
         )}
 
@@ -55,7 +57,7 @@ export default function SeccionEventos({
           <>
             {eventos.length === 0 ? (
               <p className="text-neutral-500">
-                No hay eventos disponibles.
+               {textosSinEventos?.no_encontrado}
               </p>
             ) : (
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -65,7 +67,7 @@ export default function SeccionEventos({
                     evento={evento}
                     textoEventoCardPrecio={textoEventoCardPrecio}
                     verEventosBotones={verEventosBotones}
-                    textosCategoria={textosCategoria}
+                    textosCategorias={textosCategorias}
                     idioma={idioma}
                   />
                 ))}

@@ -1,7 +1,7 @@
 
 import { LuTicket } from "react-icons/lu";
 
-export default function Footer({textos}) {
+export default function Footer({textos, taquilla}) {
   const year = new Date().getFullYear()
   return (
     <footer className="bg-main text-white">
@@ -18,28 +18,28 @@ export default function Footer({textos}) {
               </div>
 
               <span className="text-lg font-bold">
-                taquilla
+                {taquilla}
               </span>
             </div>
 
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-neutral-400">
-              {textos?.lema ?? "Conciertos, teatro, deportes y festivales en un solo lugar. Explora eventos y consulta sus detalles."}
+              {textos?.lema}
             </p>
           </div>
 
           {/* Explora */}
           <div>
             <h3 className="mb-4 text-sm font-semibold text-neutral-400">
-            {textos?.columnas?.explora?.titulo??"Explora"}
+            {textos?.columnas?.explora?.titulo}
             </h3>
 
             <div className="flex flex-col gap-3 text-sm">
               <a href="#inicio" className="hover:text-neutral-400">
-                {textos?.columnas?.explora?.enlaces?.inicio?? "Inicio"}
+                {textos?.columnas?.explora?.enlaces?.inicio}
               </a>
 
               <a href="#explorar" className="hover:text-neutral-400">
-                {textos?.columnas?.explora?.enlaces?.explorar?? "Explorar eventos"}
+                {textos?.columnas?.explora?.enlaces?.explorar}
               </a>
             </div>
           </div>
@@ -52,11 +52,11 @@ export default function Footer({textos}) {
 
             <div className="flex flex-col gap-3 text-sm">
               <a href="#iniciar-sesion" className="hover:text-neutral-400">
-                {textos?.columnas?.cuenta?.enlaces?.ingresar??"Iniciar sesión"}
+                {textos?.columnas?.cuenta?.enlaces?.ingresar}
               </a>
 
               <a href="#crear-cuenta" className="hover:text-neutral-400">
-                {textos?.columnas?.cuenta?.enlaces?.crearCuenta ?? "Crear cuenta"}
+                {textos?.columnas?.cuenta?.enlaces?.crearCuenta}
               </a>
             </div>
           </div>
@@ -64,16 +64,16 @@ export default function Footer({textos}) {
           {/* Legal */}
           <div>
             <h3 className="mb-4 text-sm font-semibold text-neutral-400">
-              {textos?.columnas?.legal?.titulo??"Legal"}
+              {textos?.columnas?.legal?.titulo}
             </h3>
 
             <div className="flex flex-col gap-3 text-sm">
               <a href="#terminos" className="hover:text-neutral-400">
-              {textos?.columnas?.legal?.enlaces?.terminos ?? "Términos de uso"}
+              {textos?.columnas?.legal?.enlaces?.terminos}
               </a>
 
               <a href="#accesibilidad" className="hover:text-neutral-400">
-                {textos?.columnas?.legal?.enlaces?.accesibilidad??"Accesibilidad"}
+                {textos?.columnas?.legal?.enlaces?.accesibilidad}
               </a>
             </div>
           </div>
@@ -84,9 +84,9 @@ export default function Footer({textos}) {
 
           {/* Parte inferior */}
           <div className="flex flex-col justify-between gap-3 text-xs text-neutral-500 sm:flex-row">
-          {textos?.legal?.derechos.replace("{anio}",year) ?? `© ${year} Taquilla · Proyecto académico`}
+          {textos?.legal?.derechos.replace("{anio}",year)}
 
-           <p>{textos?.legal?.nota?? "Datos de ejemplo con fines académicos."}</p> 
+           <p>{textos?.legal?.nota}</p> 
           </div>
         </div>
 

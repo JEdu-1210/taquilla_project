@@ -10,10 +10,12 @@ export default function FiltrosEventos({
   ciudadSeleccionada,
   setCiudadSeleccionada,
   rangoPrecio,
-  setRangoPrecio
+  setRangoPrecio,
+  textoCarga,
+  textosCategorias,
 }) {
   const { categorias, cargando, error } = useCategorias();
-  
+
   const [fechaSeleccionada, setFechaSeleccionada] = useState("hoy");
 
   const precioMinimo = rangoPrecio?.min ?? limiteMinimo;
@@ -28,24 +30,28 @@ export default function FiltrosEventos({
     });
   }
   const opcionesFecha = [
-  { id: "hoy", texto: textosFiltrados?.fecha?.hoy },
-  { id: "finDeSemana", texto: textosFiltrados?.fecha?.finDeSemana },
-  { id: "mes", texto: textosFiltrados?.fecha?.mes },
-  { id: "elegir", texto: textosFiltrados?.fecha?.elegir },
-];
+    { id: "hoy", texto: textosFiltrados?.fecha?.hoy },
+    { id: "finDeSemana", texto: textosFiltrados?.fecha?.finDeSemana },
+    { id: "mes", texto: textosFiltrados?.fecha?.mes },
+    { id: "elegir", texto: textosFiltrados?.fecha?.elegir },
+  ];
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-5">
       <div className="mb-5 flex items-center justify-between">
         <h2 className="font-bold">{textosFiltrados?.titulo}</h2>
 
-        <button className="text-xs text-gray-500">{textosFiltrados?.botones?.limpiar}</button>
+        <button className="text-xs text-gray-500" >
+          {textosFiltrados?.botones?.limpiar}
+        </button>
       </div>
 
       <hr className="mb-5 border-gray-200" />
 
-      <h3 className="mb-3 text-sm font-semibold">{textosFiltrados?.categoria}</h3>
+      <h3 className="mb-3 text-sm font-semibold">
+        {textosFiltrados?.categoria}
+      </h3>
 
-      {cargando && <p>Cargando categorías...</p>}
+      {cargando && <p>{textoCarga?.indicador}</p>}
 
       {error && <p className="text-red-500">{error}</p>}
 
@@ -64,7 +70,11 @@ export default function FiltrosEventos({
                   onChange={() => cambiarCategoria(categoria.id)}
                 />
 
-                <span className="text-sm">{categoria.nombre}</span>
+                <span className="text-sm">
+                  <span className="text-sm">
+                    {textosCategorias?.[categoria.id] ?? categoria.nombre}
+                  </span>
+                </span>
               </span>
 
               <span className="text-xs text-gray-400">{categoria.eventos}</span>
@@ -74,23 +84,25 @@ export default function FiltrosEventos({
       )}
       <hr className="my-5 border-gray-200" />
 
-      <h3 className="mb-3 text-sm font-semibold">{textosFiltrados?.fecha?.titulo}</h3>
+      <h3 className="mb-3 text-sm font-semibold">
+        {textosFiltrados?.fecha?.titulo}
+      </h3>
       <div className="flex flex-wrap gap-2">
-  {opcionesFecha.map((opcion) => (
-    <button
-      key={opcion.id}
-      type="button"
-      onClick={() => setFechaSeleccionada(opcion.id)}
-      className={`rounded-full border px-2 py-2 text-xs ${
-        fechaSeleccionada === opcion.id
-          ? "border-black bg-black text-white"
-          : "border-gray-200 bg-white text-gray-700"
-      }`}
-    >
-      {opcion.texto}
-    </button>
-  ))}
-</div>
+        {opcionesFecha.map((opcion) => (
+          <button
+            key={opcion.id}
+            type="button"
+            onClick={() => setFechaSeleccionada(opcion.id)}
+            className={`rounded-full border px-2 py-2 text-xs ${
+              fechaSeleccionada === opcion.id
+                ? "border-black bg-black text-white"
+                : "border-gray-200 bg-white text-gray-700"
+            }`}
+          >
+            {opcion.texto}
+          </button>
+        ))}
+      </div>
       <hr className="my-5 border-gray-200" />
 
       <h3 className="mb-3 text-sm font-semibold">{textosFiltrados?.ciudad}</h3>
@@ -100,13 +112,13 @@ export default function FiltrosEventos({
         onChange={(e) => setCiudadSeleccionada(e.target.value)}
         className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs outline-none focus:border-sky-500"
       >
-       {/* <option value="">Todas las ciudades</option> */}
+        {/* <option value="">Todas las ciudades</option> */}
 
-{ciudades.map((ciudad) => (
-  <option key={ciudad} value={ciudad}>
-    {ciudad}
-  </option>
-))}
+        {ciudades.map((ciudad) => (
+          <option key={ciudad} value={ciudad}>
+            {ciudad}
+          </option>
+        ))}
       </select>
 
       <hr className="my-5 border-gray-200" />

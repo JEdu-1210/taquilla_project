@@ -41,7 +41,7 @@ export default function HomePage({ idioma, textos }) {
     async function cargarEventosProximos() {
       try {
         const proximos = await buscarEventos({
-          ciudad: "Manizales",
+          ciudad: "",
         });
 
         if (activo) {
@@ -111,13 +111,12 @@ export default function HomePage({ idioma, textos }) {
                 <span className="text-neutral-500">
                   {textos?.paginas?.inicio?.hero?.buscador?.populares}
                 </span>
-                <span>salsa</span>
-                <span>Stand-up</span>
-                <span>{idioma === "en" ? "Football" : "Fútbol"}</span>
                 <span>
-                  {idioma === "en"
-                    ? "End-of-year festivals"
-                    : "Festivales de fin de año"}
+                  {textos?.paginas?.conciertos?.filtros?.etiquetas?.salsa}
+                </span>
+                <span>Stand-up</span>
+                <span>
+                  {textos?.paginas?.deportes?.filtros?.etiquetas?.futbol}
                 </span>
               </div>
             </div>
@@ -125,7 +124,9 @@ export default function HomePage({ idioma, textos }) {
             {/* Columna derecha */}
             <div>
               {cargando && (
-                <p className="text-neutral-400">Cargando evento destacado...</p>
+                <p className="text-neutral-400">
+                  {textos?.estados?.cargando?.indicador}
+                </p>
               )}
 
               {error && <p className="text-red-400">{error}</p>}
@@ -139,7 +140,7 @@ export default function HomePage({ idioma, textos }) {
               )}
 
               {!cargando && !error && !eventoDestacado && (
-                <p>No hay eventos destacados disponibles.</p>
+                <p>{textos?.errores?.no_encontrado}</p>
               )}
             </div>
           </div>
@@ -148,16 +149,12 @@ export default function HomePage({ idioma, textos }) {
         {busquedaRealizada && (
           <section className="bg-white px-6 py-12 text-black">
             <div className="mx-auto max-w-6xl">
-              <h2 className="mb-6 text-2xl font-bold">
-                Resultados de búsqueda
-              </h2>
-
-              {buscando && <p>Buscando eventos...</p>}
+              {buscando && <p>{textos?.estados?.cargando?.indicador}</p>}
 
               {errorBusqueda && <p className="text-red-600">{errorBusqueda}</p>}
 
               {!buscando && !errorBusqueda && resultados.length === 0 && (
-                <p>No se encontraron eventos.</p>
+                <p>{textos?.errores?.no_encontrado}</p>
               )}
 
               {!buscando &&
@@ -166,16 +163,22 @@ export default function HomePage({ idioma, textos }) {
                   <div key={evento.id} className="mt-4 rounded-lg border p-4">
                     <h3 className="font-bold">{evento.titulo}</h3>
                     <p>{evento.recinto?.ciudad}</p>
-                    <p>Desde ${evento.precioDesde?.toLocaleString("es-CO")}</p>
+                    <p>
+                      {textos?.componentes?.precio?.desde} $
+                      {Number(evento.precioDesde).toLocaleString(
+                        idioma === "en" ? "en-US" : "es-CO",
+                      )}
+                    </p>
                   </div>
                 ))}
             </div>
           </section>
         )}
-        <Categorias textos={textos?.general?.categorias}
-        textosCarga ={textos?.estados?.cargando}
-        textosEventos={textos?.paginas?.inicio?.categorias?.eventos}
-         />
+        <Categorias
+          textos={textos?.general?.categorias}
+          textosCarga={textos?.estados?.cargando}
+          textosEventos={textos?.paginas?.inicio?.categorias?.eventos}
+        />
         <Cookies textos={textos?.cookies?.banner} />
         <SeccionEventos
           titulo={textos?.paginas?.inicio?.destacados?.titulo}
@@ -184,9 +187,13 @@ export default function HomePage({ idioma, textos }) {
           textos={textos?.paginas?.inicio?.destacados}
           verTodos={textos?.paginas?.inicio?.destacados?.enlaces?.verTodos}
           textoEventoCardPrecio={textos?.componentes?.precio?.desde}
-          verEventosBotones={textos?.paginas?.inicio?.tarjeta?.botones?.verEvento}
+          verEventosBotones={
+            textos?.paginas?.inicio?.tarjeta?.botones?.verEvento
+          }
           textosCategorias={textos?.general?.categorias}
           idioma={idioma}
+          textosCarga={textos?.estados?.cargando}
+          testoxSinEventos={textos?.errores}
         />
         <SeccionEventos
           titulo={ciudadReemplazada}
@@ -195,12 +202,16 @@ export default function HomePage({ idioma, textos }) {
           eventos={eventosProximos}
           verTodos={textos?.paginas?.inicio?.destacados?.enlaces?.verTodos}
           textoEventoCardPrecio={textos?.componentes?.precio?.desde}
-          verEventosBotones={textos?.paginas?.inicio?.tarjeta?.botones?.verEvento}
+          verEventosBotones={
+            textos?.paginas?.inicio?.tarjeta?.botones?.verEvento
+          }
           textosCategorias={textos?.general?.categorias}
           idioma={idioma}
+          textosCarga={textos?.estados?.cargando}
+          textosSinEventos={textos?.errores}
         />
       </main>
-      <Footer textos={textos?.footer} />
+      <Footer textos={textos?.footer} taquilla={textos?.sitio?.nombre} />
     </>
   );
 }

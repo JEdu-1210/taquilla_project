@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import Icono from "./Icono.jsx";
 import "../styles/Navbar.css";
 import Accesibilidad from "./Accesibilidad.jsx";
+import { LuUserRound } from "react-icons/lu";
 
 const DESTINOS = {
-  inicio: "#incio",
+  inicio: "#inicio",
   explorar: "#explorar",
 };
 
@@ -27,11 +28,7 @@ export default function Navbar({
   const campoBusqueda = useRef(null);
   const nav = textos?.navbar;
   const ingles = idioma === "en";
-  const abrir =
-    textos?.menuMovil?.abrir ?? (ingles ? "Open menu" : "Abrir menú");
-
-  const cerrar =
-    textos?.menuMovil?.cerrar ?? (ingles ? "Close menu" : "Cerrar menú");
+  const abrir = textos?.menuMovil?.abrir;
   const enlaces = Object.entries(nav?.enlaces ?? {}).filter(
     ([clave]) => DESTINOS[clave],
   );
@@ -64,25 +61,25 @@ export default function Navbar({
     <header className="navbar">
       <nav
         className="navbar-interior"
-        aria-label={nav?.aria.menu ?? "Navegación principal"}
+        aria-label={nav?.aria.menu}
       >
         <a
           className="navbar-marca"
           href="#inicio"
-          aria-label={nav?.logo.aria ?? "Inicio"}
+          aria-label={nav?.logo.aria}
           onClick={() => setAbierto(false)}
         >
           <span className="navbar-simbolo" aria-hidden="true">
             <Icono nombre="ticket" />
           </span>
-          <span>{nav?.logo.texto ?? "Taquilla"}</span>
+          <span>{nav?.logo.texto}</span>
         </a>
 
         <div className="navbar-movil-acciones">
           <button
             type="button"
             className="navbar-icono"
-            aria-label={nav?.buscador.aria ?? "Buscar"}
+            aria-label={nav?.buscador.aria}
             disabled={!nav}
             onClick={abrirBusqueda}
           >
@@ -95,7 +92,7 @@ export default function Navbar({
               aria-label={nav.botones.ingresar}
               onClick={() => setAbierto(false)}
             >
-              <Icono nombre="favoritos" />
+              <LuUserRound size={20} />
             </a>
           )}
           <button
@@ -118,18 +115,14 @@ export default function Navbar({
         >
           {cargando && (
             <p className="navbar-estado" role="status">
-              {ingles ? "Loading navigation…" : "Cargando navegación…"}
+              {textos?.estados?.cargando?.indicador}
             </p>
           )}
           {error && (
             <div className="navbar-estado" role="alert">
-              <p>
-                {ingles
-                  ? "Navigation could not be loaded."
-                  : "No pudimos cargar el menú."}
-              </p>
               <button type="button" onClick={recargar}>
-                {ingles ? "Try again" : "Reintentar"}
+                
+                {textos?.general?.acciones?.reintentar}
               </button>
             </div>
           )}
@@ -162,8 +155,8 @@ export default function Navbar({
                   type="search"
                   value={busqueda}
                   onChange={(evento) => setBusqueda(evento.target.value)}
-                  placeholder={nav.buscador.placeholder}
-                  aria-label={nav.buscador.aria}
+                  placeholder={nav?.buscador?.placeholder}
+                  aria-label={nav?.buscador?.aria}
                   required
                 />
               </form>
@@ -173,20 +166,12 @@ export default function Navbar({
                   className="navbar-vende"
                   onClick={() => setAbierto(false)}
                 >
-                  {nav.enlaces.venderEventos}
+                  {nav?.enlaces?.venderEventos}
                 </a>
               )}
             </>
           )}
-          {/* <button
-              className="navbar-icono navbar-accesibilidad"
-              type="button"
-              aria-label={ingles ? "Enlarge text" : "Aumentar texto"}
-              aria-pressed={textoGrande}
-              onClick={alternarTexto}
-            >
-              <Icono nombre="accesibilidad" />
-            </button> */}
+         
             <Accesibilidad
               icono={<Icono nombre="accesibilidad" />}
               textos={textos}/>
@@ -196,7 +181,7 @@ export default function Navbar({
               <select
                 value={idioma}
                 onChange={(evento) => cambiarIdioma(evento.target.value)}
-                aria-label={nav?.aria.idioma ?? "Cambiar idioma"}
+                aria-label={nav?.aria?.idioma}
               >
                 <option value="es">ES</option>
                 <option value="en">EN</option>
@@ -209,7 +194,7 @@ export default function Navbar({
                 href="#ingresar"
                 onClick={() => setAbierto(false)}
               >
-                {nav.botones.ingresar}
+                {nav?.botones?.ingresar}
               </a>
             )}
           </div>
@@ -218,7 +203,7 @@ export default function Navbar({
             className="Navbar-Crear-Cuenta"
             onClick={() => setAbierto(false)}
           >
-            {nav?.botones?.crearCuenta ?? (ingles ? "Sign up" : "Crear cuenta")}
+            {nav?.botones?.crearCuenta}
           </button>
         </div>
       </nav>

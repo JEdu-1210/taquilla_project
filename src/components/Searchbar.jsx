@@ -36,14 +36,14 @@ export default function Searchbar({ onBuscar, textos }) {
 
         <div className="min-w-0 flex-1">
           <label htmlFor="evento" className="block text-xs text-neutral-500">
-            {textos?.etiquetas?.que ?? "Qué"}
+            {textos?.etiquetas?.que}
           </label>
           <input
             id="evento"
             type="search"
             value={evento}
             onChange={(e) => setEvento(e.target.value)}
-            placeholder={textos?.placeholders?.que ?? "Evento o artista"}
+            placeholder={textos?.placeholders?.que}
             className="w-full min-w-0 bg-transparent text-sm outline-none"
           />
         </div>
@@ -64,8 +64,7 @@ export default function Searchbar({ onBuscar, textos }) {
 
         <div className="min-w-0 flex-1">
           <label htmlFor="ciudad" className="block text-xs text-neutral-500">
-            {textos?.etiquetas?.donde ??
-              "Dónde"}
+            {textos?.etiquetas?.donde}
           </label>
           <input
             id="ciudad"
@@ -92,7 +91,7 @@ export default function Searchbar({ onBuscar, textos }) {
 
         <div className="min-w-0 flex-1">
           <label htmlFor="fecha" className="block text-xs text-neutral-500">
-            {textos?.etiquetas?.cuando ??"Cuándo"}
+            {textos?.etiquetas?.cuando}
           </label>
 
           <input
@@ -110,7 +109,7 @@ export default function Searchbar({ onBuscar, textos }) {
         type="submit"
         className="shrink-0 rounded-lg bg-[#141414] px-6 py-4 text-sm font-semibold text-white transition hover:bg-neutral-700"
       >
-        {textos?.botones?.buscar ?? "Buscar"}
+        {textos?.botones?.buscar}
       </button>
     </form>
   );

@@ -3,7 +3,7 @@ import EventoCard from "../components/EventoCard.jsx";
 import { useExplorarEventos } from "../hooks/useExplorarEventos.js";
 import { useState } from "react";
 
-export default function Explorar({ textos }) {
+export default function Explorar({ textos, idioma }) {
   const textosExplorar = textos?.paginas?.explorar;
   const [orden, setOrden] = useState("fecha");
   const { eventos, cargando, error } = useExplorarEventos();
@@ -83,6 +83,7 @@ export default function Explorar({ textos }) {
             setCiudadSeleccionada={setCiudadSeleccionada}
             rangoPrecio={rangoPrecio}
             setRangoPrecio={setRangoPrecio}
+            textoCarga={textos?.estados?.cargando}
           />
         </aside>
 
@@ -90,13 +91,11 @@ export default function Explorar({ textos }) {
         <section>
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
             <p className="text-sm text-gray-500">
-              
-                {(eventoFiltrados.length === 1
-                  ? textosExplorar?.resultadosCorto?.uno
-                  : textosExplorar?.resultadosCorto?.otro
-                )?.replace("{cantidad}", eventoFiltrados.length)}
-              </p>
-            
+              {(eventoFiltrados.length === 1
+                ? textosExplorar?.resultadosCorto?.uno
+                : textosExplorar?.resultadosCorto?.otro
+              )?.replace("{cantidad}", eventoFiltrados.length)}
+            </p>
 
             <select
               value={orden}
@@ -118,8 +117,14 @@ export default function Explorar({ textos }) {
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {eventoOrdenados.slice(0, 9).map((evento) => (
-              <EventoCard key={evento.id} evento={evento}
-              textoEventoCardPrecio={textos?.componentes?.precio?.desde} />
+              <EventoCard
+                key={evento.id}
+                evento={evento}
+                textoEventoCardPrecio={textos?.componentes?.precio?.desde}
+                verEventosBotones={textos?.paginas?.inicio?.tarjeta?.botones?.verEvento}
+                textosCategorias={textos?.general?.categorias}
+                idioma={idioma}
+              />
             ))}
           </div>
         </section>

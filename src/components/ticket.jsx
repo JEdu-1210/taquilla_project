@@ -18,7 +18,7 @@ export default function Ticket({ evento,textos,idioma }) {
       {/* Tarjeta blanca */}
       <div className="relative z-10 w-full rounded-xl bg-white p-5 text-black shadow-lg">
         <span className="rounded-md bg-neutral-100 px-3 py-1 text-xs">
-          {textos?.etiqueta ?? "Destacado"}
+          {textos?.etiqueta}
         </span>
 
         <h2 className="mt-3 text-xl font-bold">{evento.titulo}</h2>
@@ -29,14 +29,14 @@ export default function Ticket({ evento,textos,idioma }) {
 
         <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
           <p className="font-semibold">
-            {(textos?.desde ?? "Desde {precio}").replace("{precio}", `$${precio}`)}
+            {textos?.desde?.replace("{precio}", `$${precio}`)}
             </p>
 
           <a
             href={`#evento/${evento.slug}`}
             className="rounded-lg bg-[#141414] px-5 py-3 text-sm !text-white transition hover:bg-neutral-700"
           >
-            {textos?.botones?.verEvento??"Ver evento"} 
+            {textos?.botones?.verEvento} 
           </a>
         </div>
       </div>
