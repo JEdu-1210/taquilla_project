@@ -22,9 +22,7 @@ export default function HomePage({ idioma, textos }) {
     ciudadActual,
   );
 
-  const eventoDestacado =
-    eventos.find((evento) => evento.slug === "festival-niebla-2026") ||
-    eventos[0] ||
+  const eventoDestacado = eventos[0] ??
     null;
 
   const eventosPopulares = eventos.slice(0, 4);
@@ -187,9 +185,7 @@ export default function HomePage({ idioma, textos }) {
           textos={textos?.paginas?.inicio?.destacados}
           verTodos={textos?.paginas?.inicio?.destacados?.enlaces?.verTodos}
           textoEventoCardPrecio={textos?.componentes?.precio?.desde}
-          verEventosBotones={
-            textos?.paginas?.inicio?.tarjeta?.botones?.verEvento
-          }
+          verEventosBotones={textos?.paginas?.inicio?.tarjeta?.botones?.verEvento}
           textosCategorias={textos?.general?.categorias}
           idioma={idioma}
           textosCarga={textos?.estados?.cargando}
@@ -202,9 +198,7 @@ export default function HomePage({ idioma, textos }) {
           eventos={eventosProximos}
           verTodos={textos?.paginas?.inicio?.destacados?.enlaces?.verTodos}
           textoEventoCardPrecio={textos?.componentes?.precio?.desde}
-          verEventosBotones={
-            textos?.paginas?.inicio?.tarjeta?.botones?.verEvento
-          }
+          verEventosBotones={textos?.paginas?.inicio?.tarjeta?.botones?.verEvento}
           textosCategorias={textos?.general?.categorias}
           idioma={idioma}
           textosCarga={textos?.estados?.cargando}
