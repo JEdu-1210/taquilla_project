@@ -1,4 +1,3 @@
-
 import { useCategorias } from "../hooks/useCategoria.js";
 
 import {
@@ -19,20 +18,15 @@ const iconos = {
   familiares: LuUsersRound,
 };
 
-export default function Categorias({ textos }) {
+export default function Categorias({ textos, textosCarga, textosEventos }) {
   const { categorias, cargando, error } = useCategorias();
 
   return (
     <section className="bg-[#f7f7f7] px-6 py-12">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
+        {cargando && <p>{textosCarga?.titulo}</p>}
 
-        {cargando && (
-          <p>Cargando categorías...</p>
-        )}
-
-        {error && (
-          <p className="text-red-600">{error}</p>
-        )}
+        {error && <p className="text-red-600">{error}</p>}
 
         {!cargando &&
           !error &&
@@ -52,12 +46,16 @@ export default function Categorias({ textos }) {
                 </h3>
 
                 <p className="text-sm text-neutral-500">
-                  {categoria.eventos} eventos
+                  <p className="text-sm text-neutral-500">
+                    {(categoria.eventos === 1
+                      ? textosEventos?.uno
+                      : textosEventos?.otro
+                    )?.replace("{cantidad}", categoria.eventos)}
+                  </p>
                 </p>
               </a>
             );
           })}
-
       </div>
     </section>
   );

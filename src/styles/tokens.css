@@ -58,3 +58,31 @@
 .bg-main {
     background: var(--color-primario-marca);
 }
+
+.subrayar-enlaces a {
+    text-decoration: underline !important;
+    color: red !important;
+}
+
+.alto-contraste {
+    filter: contrast(1.4);
+    font-weight: 900;
+}
+
+.reducir-movimiento,
+.reducir-movimiento *,
+.reducir-movimiento *::before,
+.reducir-movimiento *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Espaciado de lectura */
+.espaciado-lectura,
+.espaciado-lectura * {
+  letter-spacing: 0.08em !important;
+  word-spacing: 0.16em !important;
+  line-height: 1.8 !important;
+}

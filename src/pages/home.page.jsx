@@ -92,18 +92,15 @@ export default function HomePage({ idioma, textos }) {
             {/* Columna izquierda */}
             <div>
               <span className="inline-block rounded-md bg-white px-3 py-1 text-xs font-medium text-black">
-                {textos?.paginas?.inicio?.hero?.etiquetas?.temporada ??
-                  "Season Nov - Dec  2026"}
+                {textos?.paginas?.inicio?.hero?.etiquetas?.temporada}
               </span>
 
               <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight lg:text-[42px]">
-                {textos?.paginas?.inicio?.hero?.titulo ??
-                  "Tu próxima noche empieza aquí"}
+                {textos?.paginas?.inicio?.hero?.titulo}
               </h1>
 
               <p className="mt-5 max-w-xl text-base leading-relaxed text-neutral-400">
-                {textos?.paginas?.inicio?.hero?.subtitulo ??
-                  "Conciertos, teatro, deportes y festivales. Busca por categoría,fecha o ciudad y consulta todos los detalles de cada evento."}
+                {textos?.paginas?.inicio?.hero?.subtitulo}
               </p>
 
               <Searchbar
@@ -112,10 +109,9 @@ export default function HomePage({ idioma, textos }) {
               />
               <div className="mt-5 flex flex-wrap items-center gap-3 text-xs">
                 <span className="text-neutral-500">
-                  {textos?.paginas?.inicio?.hero?.buscador?.populares ??
-                    "Populares:"}
+                  {textos?.paginas?.inicio?.hero?.buscador?.populares}
                 </span>
-                <span>Salsa</span>
+                <span>salsa</span>
                 <span>Stand-up</span>
                 <span>{idioma === "en" ? "Football" : "Fútbol"}</span>
                 <span>
@@ -176,7 +172,10 @@ export default function HomePage({ idioma, textos }) {
             </div>
           </section>
         )}
-        <Categorias textos={textos?.general?.categorias} />
+        <Categorias textos={textos?.general?.categorias}
+        textosCarga ={textos?.estados?.cargando}
+        textosEventos={textos?.paginas?.inicio?.categorias?.eventos}
+         />
         <Cookies textos={textos?.cookies?.banner} />
         <SeccionEventos
           titulo={textos?.paginas?.inicio?.destacados?.titulo}
@@ -184,6 +183,10 @@ export default function HomePage({ idioma, textos }) {
           eventos={eventosPopulares}
           textos={textos?.paginas?.inicio?.destacados}
           verTodos={textos?.paginas?.inicio?.destacados?.enlaces?.verTodos}
+          textoEventoCardPrecio={textos?.componentes?.precio?.desde}
+          verEventosBotones={textos?.paginas?.inicio?.tarjeta?.botones?.verEvento}
+          textosCategorias={textos?.general?.categorias}
+          idioma={idioma}
         />
         <SeccionEventos
           titulo={ciudadReemplazada}
@@ -191,6 +194,10 @@ export default function HomePage({ idioma, textos }) {
           textos={textos?.paginas?.inicio?.proximos}
           eventos={eventosProximos}
           verTodos={textos?.paginas?.inicio?.destacados?.enlaces?.verTodos}
+          textoEventoCardPrecio={textos?.componentes?.precio?.desde}
+          verEventosBotones={textos?.paginas?.inicio?.tarjeta?.botones?.verEvento}
+          textosCategorias={textos?.general?.categorias}
+          idioma={idioma}
         />
       </main>
       <Footer textos={textos?.footer} />

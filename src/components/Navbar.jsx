@@ -188,7 +188,8 @@ export default function Navbar({
               <Icono nombre="accesibilidad" />
             </button> */}
             <Accesibilidad
-              icono={<Icono nombre="accesibilidad" />}/>
+              icono={<Icono nombre="accesibilidad" />}
+              textos={textos}/>
           <div className="navbar-utilidades">
             <label className="navbar-idioma">
               <Icono nombre="idioma" />

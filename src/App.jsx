@@ -3,7 +3,7 @@ import "./styles/App.css";
 import Navbar from "./components/Navbar.jsx";
 import { useEffect, useState } from "react";
 import HomePage from "./pages/home.page.jsx";
-import Cookies from "./components/Cookies.jsx";
+import Explorar from "./pages/Explorar.jsx";
 
 function leerSeleccion() {
   return window.location.hash.slice(1) || "inicio";
@@ -53,8 +53,8 @@ function App() {
   // Función de búsqueda
   function buscar(valor) {
     setConsulta(valor);
-    setActivo("heroes");
-    window.history.replaceState(null, "", "#heroes");
+    setActivo("evento");
+    window.history.replaceState(null, "", "#evento");
   }
 
   return (
@@ -72,6 +72,7 @@ function App() {
       {activo === "inicio" && (
         <HomePage idioma={idioma} textos={datos.textos} />
       )}
+      {activo === "explorar" && <Explorar textos={datos.textos} />}
     </>
   );
 }

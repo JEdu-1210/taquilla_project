@@ -1,5 +1,6 @@
 
-const API_URL = "https://yanethm-taquilla-api.fly.dev/api/v1";
+
+const API_URL = import.meta.env.VITE_API_URL
 
 export async function obtenerEventosDestacados() {
   const respuesta = await fetch(`${API_URL}/eventos/destacados`);

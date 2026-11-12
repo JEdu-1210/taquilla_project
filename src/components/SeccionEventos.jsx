@@ -9,6 +9,10 @@ export default function SeccionEventos({
   eventos = [],
   cargando = false,
   error = "",
+  textoEventoCardPrecio,
+  verEventosBotones,
+  textosCategoria,
+  idioma
 }) {
   return (
     <section className="bg-[#f7f7f7] py-8">
@@ -18,7 +22,7 @@ export default function SeccionEventos({
         <div className="mb-5 flex items-center justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-[#141414]">
-              {titulo ?? "Destacados de la semana"}
+              {titulo}
             </h2>
 
             <p className="mt-1 text-sm text-neutral-500">
@@ -30,7 +34,7 @@ export default function SeccionEventos({
             href="#explorar"
             className="shrink-0 text-sm font-medium text-[#141414] hover:underline"
           >
-            {verTodos ?? "Ver todos"}
+            {verTodos}
           </a>
         </div>
 
@@ -59,6 +63,10 @@ export default function SeccionEventos({
                   <EventoCard
                     key={evento.id}
                     evento={evento}
+                    textoEventoCardPrecio={textoEventoCardPrecio}
+                    verEventosBotones={verEventosBotones}
+                    textosCategoria={textosCategoria}
+                    idioma={idioma}
                   />
                 ))}
               </div>

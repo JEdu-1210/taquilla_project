@@ -1,10 +1,12 @@
 
 import { LuCalendarDays, LuMapPin } from "react-icons/lu";
 
-export default function EventoCard({ evento }) {
+export default function EventoCard({ evento, textoEventoCardPrecio,verEventosBotones,textosCategorias,idioma }) {
   const fecha = new Date(evento.fecha);
 
-  const fechaTexto = new Intl.DateTimeFormat("es-CO", {
+  const fechaTexto = new Intl.DateTimeFormat(
+  idioma === "en" ? "en-US" : "es-CO",
+  {
     weekday: "short",
     day: "numeric",
     month: "short",
@@ -12,18 +14,12 @@ export default function EventoCard({ evento }) {
     minute: "2-digit",
     hour12: true,
     timeZone: "America/Bogota",
-  }).format(fecha);
+  }
+).format(fecha);
 
-  const precio = Number(evento.precioDesde).toLocaleString("es-CO");
-
-  const nombresCategorias = {
-    conciertos: "Concierto",
-    festivales: "Festival",
-    teatro: "Teatro",
-    deportes: "Deportes",
-    comedia: "Comedia",
-    familiares: "Familiar",
-  };
+const precio = Number(evento.precioDesde).toLocaleString(
+  idioma === "en" ? "en-US" : "es-CO"
+);
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white text-[#141414]">
@@ -41,7 +37,7 @@ export default function EventoCard({ evento }) {
       {/* Información */}
       <div className="flex flex-1 flex-col p-4">
         <span className="mb-2 w-fit rounded bg-neutral-100 px-2 py-1 text-[10px]">
-          {nombresCategorias[evento.categoria] || evento.categoria}
+          {textosCategorias?.[evento.categoria] ?? evento.categoria}
         </span>
 
         <h3 className="text-base font-bold leading-snug">
@@ -64,7 +60,7 @@ export default function EventoCard({ evento }) {
 
         <div className="mt-auto flex items-end justify-between gap-3 pt-5">
           <div>
-            <p className="text-[10px] text-neutral-500">Desde</p>
+            <p className="text-[10px] text-neutral-500">{textoEventoCardPrecio}</p>
             <p className="text-sm font-semibold">${precio}</p>
           </div>
 
@@ -72,7 +68,7 @@ export default function EventoCard({ evento }) {
             href={`#evento/${evento.slug}`}
             className="rounded-md border border-neutral-300 px-4 py-2 text-xs font-medium text-[#141414] transition hover:bg-neutral-100"
           >
-            Ver evento
+            {verEventosBotones}
           </a>
         </div>
       </div>

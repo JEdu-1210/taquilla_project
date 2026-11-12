@@ -45,6 +45,7 @@ export function useTextos(idioma) {
                 if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
                 //Si si respondio los datos correctamente
                 const datos = await respuesta.json();
+                console.log("textos API: ", datos)
                 const nuevosTextos = validarTextos(datos);
                 if (vigente) setTextos(nuevosTextos);
             } catch (errorConsulta) {
