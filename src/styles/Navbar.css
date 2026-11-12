@@ -90,17 +90,23 @@
 
 .navbar-panel {
     display: none;
-    width: 100%;
-    max-height: calc(100dvh - 64px);
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(320px, 85vw);
+    height: 100dvh;
+    max-height: 100dvh;
+    padding: 76px 20px 20px;
+    background: #ffffff;
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
     overflow-y: auto;
-    padding-block: 16px 24px;
-    border-top: 1px solid var(--color-borde);
+    z-index: 1001;
 }
 
 .navbar-panel.is-abierto {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 
 .navbar-enlaces {
@@ -273,6 +279,10 @@
         overflow: visible;
         padding: 0;
         border: 0;
+        position: static;
+        height: auto;
+        box-shadow: none;
+        background: transparent;
     }
 
     .navbar-enlaces {
@@ -333,26 +343,63 @@
 }
 
 .navbar-vende {
-  text-decoration: none;
-  color: #4b5563;
-  font-size: 14px;
-  font-weight: 500;
-  white-space: nowrap; /* Evita que el texto se parta en dos líneas */
-  margin: 0 4px;
-  transition: color 0.2s ease;
+    text-decoration: none;
+    color: #4b5563;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    /* Evita que el texto se parta en dos líneas */
+    margin: 0 4px;
+    transition: color 0.2s ease;
 }
 
 .navbar-vende:hover {
-  color: #111111;
+    color: #111111;
 }
 
-.Navbar-Crear-Cuenta{
-background-color: var(--color-primario-marca);
-color:#ffffff;
-border: none;
-border-radius: 10px;
-padding: 12px 24px;
-font-size: 50px;
+.Navbar-Crear-Cuenta {
+    background-color: var(--color-primario-marca);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 50px;
 
+
+}
+
+@media (max-width: 1099px) {
+    .navbar-enlaces {
+        margin-bottom: auto;
+    }
+
+    .navbar-buscador {
+        display: none;
+    }
+
+    .navbar-utilidades {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .navbar-accion {
+        width: 100%;
+        justify-content: center;
+        background: #141414;
+        color: #ffffff;
+    }
+
+    .Navbar-Crear-Cuenta {
+
+        background-color: var(--color-primario-marca);
+        color: #ffffff;
+        border: none;
+        border-radius: 10px;
+        padding: 12px 24px;
+        font-size: 14px;
+        font-weight: 600;
+    }
 
 }

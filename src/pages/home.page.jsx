@@ -87,19 +87,19 @@ export default function HomePage({ idioma, textos }) {
   return (
     <>
       <main>
-        <section className="bg-main text-white h-146">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 py-16 lg:grid-cols-[1.4fr_1fr] lg:px-8">
+        <section className="bg-main text-white h-auto lg:min-h-146">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-6 px-4 py-8 lg:grid-cols-[1.4fr_1fr] lg:gap-10 lg:px-8 lg:py-16">
             {/* Columna izquierda */}
             <div>
-              <span className="inline-block rounded-md bg-white px-3 py-1 text-xs font-medium text-black">
+              <span className="hidden rounded-md bg-white px-3 py-1 text-xs font-medium text-black lg:inline-block">
                 {textos?.paginas?.inicio?.hero?.etiquetas?.temporada}
               </span>
 
-              <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight lg:text-[42px]">
+              <h1 className="mt-4 text-[32px] font-bold leading-[1.12] tracking-tight sm:text-4xl lg:mt-5 lg:text-[42px]">
                 {textos?.paginas?.inicio?.hero?.titulo}
               </h1>
 
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-neutral-400">
+              <p className="mt-5 hidden max-w-xl text-base leading-relaxed text-neutral-400 lg:block">
                 {textos?.paginas?.inicio?.hero?.subtitulo}
               </p>
 
@@ -107,7 +107,7 @@ export default function HomePage({ idioma, textos }) {
                 onBuscar={realizarBusqueda}
                 textos={textos?.paginas?.inicio?.hero?.buscador}
               />
-              <div className="mt-5 flex flex-wrap items-center gap-3 text-xs">
+              <div className="mt-5 hidden flex-wrap items-center gap-3 text-xs lg:flex">
                 <span className="text-neutral-500">
                   {textos?.paginas?.inicio?.hero?.buscador?.populares}
                 </span>
@@ -122,7 +122,7 @@ export default function HomePage({ idioma, textos }) {
             </div>
 
             {/* Columna derecha */}
-            <div>
+            <div className="hidden lg:block">
               {cargando && (
                 <p className="text-neutral-400">
                   {textos?.estados?.cargando?.indicador}

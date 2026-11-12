@@ -22,7 +22,7 @@ const precio = Number(evento.precioDesde).toLocaleString(
 );
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white text-[#141414]">
+    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white text-[#141414] w-[230px] shrink-0 lg:w-auto">
       {/* Afiche decorativo */}
      { <div
         className="relative h-40 overflow-hidden"

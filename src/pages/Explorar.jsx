@@ -69,7 +69,7 @@ export default function Explorar({ textos, idioma }) {
       </section>
 
       {/* Contenido principal */}
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-6 py-8 lg:grid-cols-[260px_1fr]">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 py-6 lg:grid-cols-[260px_1fr] lg:px-6 lg:py-8">
         {/* Columna izquierda */}
         <aside>
           <FiltrosEventos

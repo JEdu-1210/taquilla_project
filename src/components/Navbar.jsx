@@ -21,6 +21,7 @@ export default function Navbar({
   textoGrande,
   alternarTexto,
 }) {
+  const menuMovil = textos?.menuMovil;
   const [abierto, setAbierto] = useState(false);
   const [busqueda, setBusqueda] = useState("");
 
@@ -28,7 +29,8 @@ export default function Navbar({
   const campoBusqueda = useRef(null);
   const nav = textos?.navbar;
   const ingles = idioma === "en";
-  const abrir = textos?.menuMovil?.abrir;
+  const abrir = menuMovil?.abrir;
+  const cerrar = menuMovil?.cerrar;
   const enlaces = Object.entries(nav?.enlaces ?? {}).filter(
     ([clave]) => DESTINOS[clave],
   );

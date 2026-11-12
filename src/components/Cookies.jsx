@@ -18,21 +18,21 @@ export default function Cookies({textos}) {
     return null;
   }
   return (
-    <div className="rounded-xl bg-white p-6 shadow-lg ">
-      <h3 className="text-lg font-semibold text-neutral-900">
+    <div className="fixed bottom-4 left-4 right-4 z-50 max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-2xl border border-neutral-200 bg-white p-4 shadow-xl sm:bottom-6 sm:left-1/2 sm:right-auto sm:w-[420px] sm:max-w-[calc(100vw-3rem)] sm:-translate-x-1/2 sm:p-6">
+      <h3 className="text-base font-semibold text-neutral-900 sm:text-lg">
         {textos?.titulo}</h3>
-      <p className="text-sm text-neutral-600 mt-2">
+      <p className="mt-2 text-sm leading-relaxed text-neutral-600">
         {textos?.texto}
       </p>
-      <div className="mt-4 flex justify-end gap-3 ">
+      <div className="mt-4 grid grid-cols-2 gap-3">
         <button
-          className="px-5 py-2 text-(--color-principal-texto) rounded-lg border border-neutral-300 "
+          cclassName="min-w-0 rounded-lg border border-neutral-300 px-3 py-3 text-sm font-medium text-neutral-900 transition hover:bg-neutral-100"
           onClick={rechazarCookies}
         >
           {textos?.botones?.rechazar}
         </button>
         <button
-          className="bg-main px-5 py-2 rounded-lg text-white"
+          className="min-w-0 rounded-lg bg-main px-3 py-3 text-sm font-medium text-white transition hover:opacity-90"
           onClick={aceptarCookies}
         >
           {textos?.botones?.aceptar}

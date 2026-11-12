@@ -60,7 +60,7 @@ export default function SeccionEventos({
                {textosSinEventos?.no_encontrado}
               </p>
             ) : (
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="flex gap-4 overflow-x-auto pb-4 lg:grid lg:grid-cols-4 lg:overflow-visible">
                 {eventos.slice(0, 4).map((evento) => (
                   <EventoCard
                     key={evento.id}
