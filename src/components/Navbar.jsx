@@ -178,17 +178,29 @@ export default function Navbar({
               icono={<Icono nombre="accesibilidad" />}
               textos={textos}/>
           <div className="navbar-utilidades">
-            <label className="navbar-idioma">
-              <Icono nombre="idioma" />
-              <select
-                value={idioma}
-                onChange={(evento) => cambiarIdioma(evento.target.value)}
-                aria-label={nav?.aria?.idioma}
-              >
-                <option value="es">ES</option>
-                <option value="en">EN</option>
-              </select>
-            </label>
+            <div
+  className="navbar-idioma"
+  role="group"
+  aria-label={nav?.aria?.idioma}
+>
+  <button
+    type="button"
+    className={`navbar-idioma-boton ${idioma === "es" ? "activo" : ""}`}
+    onClick={() => cambiarIdioma("es")}
+    aria-pressed={idioma === "es"}
+  >
+    ES
+  </button>
+
+  <button
+    type="button"
+    className={`navbar-idioma-boton ${idioma === "en" ? "activo" : ""}`}
+    onClick={() => cambiarIdioma("en")}
+    aria-pressed={idioma === "en"}
+  >
+    EN
+  </button>
+</div>
             
             {nav && (
               <a
