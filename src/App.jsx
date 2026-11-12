@@ -72,7 +72,7 @@ function App() {
       {activo === "inicio" && (
         <HomePage idioma={idioma} textos={datos.textos} />
       )}
-      {activo === "explorar" && <Explorar textos={datos.textos} />}
+      {activo === "explorar" && <Explorar textos={datos.textos} idioma={idioma}/>}
     </>
   );
 }
