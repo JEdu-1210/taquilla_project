@@ -18,7 +18,7 @@ export default function SeccionEventos({
 }) {
   return (
     <section className="bg-[#f7f7f7] py-8">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-[1500px] px-6 lg:px-8">
 
         {/* Encabezado */}
         <div className="mb-5 flex items-center justify-between gap-4">
@@ -60,7 +60,7 @@ export default function SeccionEventos({
                {textosSinEventos?.no_encontrado}
               </p>
             ) : (
-              <div className="flex gap-4 overflow-x-auto pb-4 lg:grid lg:grid-cols-4 lg:overflow-visible">
+              <div className="flex gap-4 overflow-x-auto pb-4 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible">
                 {eventos.slice(0, 4).map((evento) => (
                   <EventoCard
                     key={evento.id}
