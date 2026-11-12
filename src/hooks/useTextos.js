@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 const CLAVES_MENU = ["inicio", "explorar",];
 function validarTextos(datos) {
     const textos = datos?.textos;
@@ -39,7 +39,7 @@ export function useTextos(idioma) {
 
         async function cargarTextosNavbar() {
             try {
-                const respuesta = await fetch(`${API}?idioma=${idioma}`, {
+                const respuesta = await fetch(`${API_URL}/textos?idioma=${idioma}`, {
                     signal: controlador.signal,
                 });
                 if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
